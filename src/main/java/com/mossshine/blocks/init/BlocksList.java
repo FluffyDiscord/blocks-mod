@@ -718,10 +718,10 @@ public class BlocksList
 
     public static final RegistryObject<Block> BLOCK_CAMOUFLAGE = register("block_camouflage", BlockCamouflage::new);
 
+//    public static final RegistryObject<>
     public static final RegistryObject<TileEntityType<SwappableTextureTileEntity>> TE__SWAPPABLE_TEXTURE = Registration.TILE_ENTITY_TYPES.register("swappable_texture", () -> TileEntityType.Builder.create(SwappableTextureTileEntity::new, BLOCK_CAMOUFLAGE.get()).build(null));
 
-    public static void setCutoutRenderLayers(final FMLClientSetupEvent event)
-    {
+    public static void setCutoutRenderLayers(final FMLClientSetupEvent event) {
         RenderTypeLookup.setRenderLayer(BlocksList.LEAVES_VARIANT_2.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlocksList.LEAVES_PINE_NEEDLES.get(), RenderType.getCutout());
         RenderTypeLookup.setRenderLayer(BlocksList.LEAVES_POPCORN_GARLAND_NEEDLES.get(), RenderType.getCutout());

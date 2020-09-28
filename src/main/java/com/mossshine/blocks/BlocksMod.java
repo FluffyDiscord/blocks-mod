@@ -53,7 +53,7 @@ public class BlocksMod
         Registration.register();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(BlocksList::setCutoutRenderLayers);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(SwapLists::init);
-        FMLJavaModLoadingContext.get().getModEventBus().addListener(BlocksMod::onModelBakeEvent);
+//        FMLJavaModLoadingContext.get().getModEventBus().addListener(BlocksMod::onModelBakeEvent);
 
         packetManager.initialize();
 
@@ -61,25 +61,26 @@ public class BlocksMod
 
     // Called after all the other baked block models have been added to the modelRegistry
     // Allows us to manipulate the modelRegistry before BlockModelShapes caches them.
-    @SubscribeEvent
-    public static void onModelBakeEvent(ModelBakeEvent event)
-    {
-        // Find the existing mappings for CamouflageBakedModel - they will have been added automatically because
-        //  of our blockstates file for the BlockCamouflage.
-        // Replace the mapping with our CamouflageBakedModel.
-        // we only have one BlockState variant but I've shown code that loops through all of them, in case you have more than one.
-
-        for (BlockState blockState : BlocksList.BLOCK_CAMOUFLAGE.get().getStateContainer().getValidStates()) {
-            ModelResourceLocation variantMRL = BlockModelShapes.getModelLocation(blockState);
-            IBakedModel existingModel = event.getModelRegistry().get(variantMRL);
-            if (existingModel == null) {
-                LOGGER.warn("Did not find the expected vanilla baked model(s) for blockCamouflage in registry");
-            } else if (existingModel instanceof DynamicBlockModel) {
-                LOGGER.warn("Tried to replace CamouflagedBakedModel twice");
-            } else {
-                DynamicBlockModel customModel = new DynamicBlockModel(existingModel);
-                event.getModelRegistry().put(variantMRL, customModel.getBakedModel());
-            }
-        }
-    }
+//    @SubscribeEvent
+//    public static void onModelBakeEvent(ModelBakeEvent event)
+//    {
+//        event.getModelRegistry().put("")
+//        // Find the existing mappings for CamouflageBakedModel - they will have been added automatically because
+//        //  of our blockstates file for the BlockCamouflage.
+//        // Replace the mapping with our CamouflageBakedModel.
+//        // we only have one BlockState variant but I've shown code that loops through all of them, in case you have more than one.
+//
+//        for (BlockState blockState : BlocksList.BLOCK_CAMOUFLAGE.get().getStateContainer().getValidStates()) {
+//            ModelResourceLocation variantMRL = BlockModelShapes.getModelLocation(blockState);
+//            IBakedModel existingModel = event.getModelRegistry().get(variantMRL);
+//            if (existingModel == null) {
+//                LOGGER.warn("Did not find the expected vanilla baked model(s) for blockCamouflage in registry");
+//            } else if (existingModel instanceof DynamicBlockModel) {
+//                LOGGER.warn("Tried to replace CamouflagedBakedModel twice");
+//            } else {
+//                DynamicBlockModel customModel = new DynamicBlockModel(existingModel);
+//                event.getModelRegistry().put(variantMRL, customModel.getBakedModel());
+//            }
+//        }
+//    }
 }
